@@ -1,2 +1,2 @@
 # kanahebi
-qualifier system
+qualifier system for kanahebi tournament
