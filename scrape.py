@@ -5,6 +5,8 @@ import pandas as pd
 import discord
 from discord.ext import commands
 from secret import DISCORD_TOKEN
+from secret import MESSAGE_CHANNEL_ID
+from secret import LEADERBOARD_CHANNEL_ID
 bot = commands.Bot(command_prefix='/')
 
 @bot.command()
@@ -38,7 +40,7 @@ async def qual(ctx):
                     if acc > float(data.at[name, n.text]):
                         data.at[name,n.text] = acc
                         local_rank = local(data,name,n.text)
-                        channel = bot.get_channel(736722316033130606)
+                        channel = bot.get_channel(MESSAGE_CHANNEL_ID)
                         text = "{}さんが {} を更新！ acc ... {} (譜面内順位 **#{}**)".format(name,n.text,acc,local_rank)
                         await channel.send(text) #honban
                         # await ctx.send(text) #debug
@@ -73,7 +75,7 @@ async def qual(ctx):
             score = float(score)/100
             text += '#{} {} ... {}%\n'.format(i+1,v,score)
 
-    channel = bot.get_channel(770694161165844500)
+    channel = bot.get_channel(LEADERBOARD_CHANNEL_ID)
     lid = channel.last_message_id
     last_message = await channel.fetch_message(lid)
     await last_message.edit(content=text) #honban
